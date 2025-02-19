@@ -1,0 +1,38 @@
+<h1>Bank Accounts</h1>
+<table border="1">
+  <tr>
+    <th>Bank Account</th>
+    <th>Balance</th>
+    <th>Enforcing Min Balance?</th>
+    <th>Min Balance</th>
+  </tr>
+  <% @bank_accounts.each do |account| %>
+    <tr>
+      <td><%= account.name %></td>
+      <td><%= account.balance %></td>
+      <td><%= account.enforcing_min_balance ? "Yes" : "No" %></td>
+      <td><%= account.min_balance || "-" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Invest in a Mutual Fund</h2>
+<form action="/bank_accounts/investment" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <label>Investment Amount:</label>
+  <input type="number" name="amount" required>
+  <button type="submit">Submit</button>
+</form>
+
+<% if @selected_accounts %>
+  <h2>Investment Allocation</h2>
+  <% if @selected_accounts.first[:message] %>
+    <p style="color: red;"><%= @selected_accounts.first[:message] %></p>
+  <% else %>
+    <ul>
+      <% @selected_accounts.each do |selected| %>
+        <li><%= selected[:account] %> → Withdraw <%= selected[:withdraw_amount] %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

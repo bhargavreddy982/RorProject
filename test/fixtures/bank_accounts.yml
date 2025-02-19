@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  balance: 1
+  enforcing_min_balance: false
+  min_balance: 1
+
+two:
+  name: MyString
+  balance: 1
+  enforcing_min_balance: false
+  min_balance: 1
